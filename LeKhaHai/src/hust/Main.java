@@ -7,7 +7,7 @@ public class Main {
 		DataModel data = new DataModel();
 		data.creatData();
 		int choose=100;
-		String studentId, studentName, classId = "";
+		String studentId, studentName, classId = "", teacherId = "";
 		while(choose!=0) {
 			System.out.println("\nNhập vào chức năng bạn muốn sử dụng:");
 			System.out.println("________________MENU________________\n");
@@ -65,6 +65,25 @@ public class Main {
 	        case 2: 
 	        	System.out.println("Danh sách giảng viên là:\n"); 
 	        	data.printTeachers();
+	        	int chooseTeachersTab=100;
+	        	 while(chooseTeachersTab!=0) {
+	        		 System.out.println("Bạn muốn?\n0.Thoát  1.D/sách SV theo học");
+	        		 System.out.print("Chọn chức năng: ");
+	        		 chooseTeachersTab = Input.nextInt();
+	        		 switch(chooseTeachersTab) {
+	        		 case 0: break;
+	        		 case 1:
+	        			 teacherId = "";
+	        			 Input.nextLine();
+	        			 while(data.getTeacherById(teacherId)==null) {
+	        				 System.out.print("\nNhập vào Mã số giảng viên: ");		        			 
+	        				 teacherId = Input.nextLine();		        			 
+	        			 }
+	        			 Teacher.printTeacher(data.getTeacherById(teacherId), 1);	
+	        			 data.printClassAndStudentByTeacherId(teacherId);
+	        			 break;
+	        		 }
+	        	 }
 	        	break;
 	        case 3: 
 	        	System.out.println("Danh sách học phần là:\n"); 

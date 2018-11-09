@@ -10,6 +10,7 @@ public class DataModel {
 	private List<Teacher> teachers = new ArrayList<Teacher>();
 	private List<Class> classes = new ArrayList<Class>();
 	private List<RegisterClass> registerClasses = new ArrayList<RegisterClass>();
+	private String[] as;
 	
 	
 	//constructor
@@ -227,6 +228,7 @@ public class DataModel {
 			teachers.add(new Teacher("Nguyễn Kim Anh", "anhnk","Viện CNTT & TT"));
 			teachers.add(new Teacher("Đàm Thanh Sơn", "sondt","Viện CNTT & TT"));
 			teachers.add(new Teacher("I Can Do It", "icdi","Bộ môn thể chất"));
+			teachers.add(new Teacher("Lê Khả Hải", "hailk","Em là sinh viên, cái này để test!"));
 		}
 		return teachers;
 	}
@@ -238,6 +240,30 @@ public class DataModel {
 			}
 		}
 		return hs1;		
+	}
+	public List<Class> getClassesByTeacherId(String id) {
+		List<Class> lops = new ArrayList<Class>();
+		for(Class lop:classes) {
+			if(lop.getTeacherId().equals(id)) {
+				lops.add(lop);
+			}
+		}
+		return lops;
+	}
+	public void printClassAndStudentByTeacherId(String id){
+		List<Class> lops = this.getClassesByTeacherId(id);
+		if(lops.isEmpty()) {
+			System.out.println("Giảng viên này hiện chưa dạy lớp nào!!");
+		}
+		else {
+			System.out.println("Danh sách lớp giảng viên đang dạy là:");
+			int x = 1;
+			for(Class lop: lops) {
+				this.printAClass(lop, x);
+				this.getStudentsByClassId(lop.getClassId());
+				x++;
+			}
+		}
 	}
 	public void printTeachers() {
 		int i = 1;
